@@ -1,5 +1,7 @@
 package util;
 
+import exception.BusinessException;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -82,7 +84,12 @@ public class ConsoleUtil {
      */
     public static String readLine(String prompt) {
         System.out.print(prompt + ": ");
-        return SCANNER.nextLine().trim();
+        try {
+            return SCANNER.nextLine().trim();
+        } catch (java.util.NoSuchElementException e) {
+            // 输入流已关闭（如管道输入耗尽），返回空字符串
+            return "";
+        }
     }
 
     /**
@@ -91,7 +98,15 @@ public class ConsoleUtil {
     public static int readInt(String prompt) {
         while (true) {
             System.out.print(prompt + ": ");
-            String input = SCANNER.nextLine().trim();
+            String input;
+            try {
+                input = SCANNER.nextLine().trim();
+            } catch (java.util.NoSuchElementException e) {
+                throw new BusinessException("输入流已关闭");
+            }
+            if (input.isEmpty()) {
+                throw new BusinessException("输入为空");
+            }
             try {
                 return Integer.parseInt(input);
             } catch (NumberFormatException e) {
@@ -210,6 +225,10 @@ public class ConsoleUtil {
      */
     public static void pause() {
         System.out.print("\n按回车键继续...");
-        SCANNER.nextLine();
+        try {
+            SCANNER.nextLine();
+        } catch (java.util.NoSuchElementException e) {
+            // 输入流耗尽，直接返回
+        }
     }
 }
