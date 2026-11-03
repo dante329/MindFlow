@@ -32,6 +32,5 @@ bin/
 .DS_Store
 
 ### Project ###
-lib/*.jar
 mindflow.db
 exports/
