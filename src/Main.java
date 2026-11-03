@@ -161,6 +161,8 @@ public class Main {
         // 自动登录
         UserService.getInstance().login(username, password);
         startReminderThread();
+        // 首次注册自动导入示例题目
+        SampleDataService.getInstance().initIfEmpty();
     }
 
     private static void handleLogin() {
@@ -169,6 +171,8 @@ public class Main {
         String password = ConsoleUtil.readPassword("密码");
         UserService.getInstance().login(username, password);
         startReminderThread();
+        // 登录后检查是否需要导入示例数据
+        SampleDataService.getInstance().initIfEmpty();
     }
 
     // ==================== 答题练习 ====================
