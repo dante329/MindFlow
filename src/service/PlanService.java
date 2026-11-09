@@ -48,9 +48,18 @@ public class PlanService {
             ConsoleUtil.printWarning("今天还没有制定计划");
         } else {
             for (DailyPlan plan : plans) {
+                // 用今天实际答题数来显示进度，比 plan 表里的 actualCount 更准
+                int actual = Math.max(plan.getActualCount(), todayDone);
+                int percent = plan.getTargetCount() > 0 ? Math.min(100, actual * 100 / plan.getTargetCount()) : 0;
+                int filled = percent / 5;
+                String bar = "[" + "█".repeat(filled) + "░".repeat(20 - filled) + "] " + percent + "%";
+
                 System.out.println("  目标: " + plan.getTargetCount() + " 题");
-                System.out.println("  进度: " + plan.getProgressBar());
-                System.out.println("  实际完成: " + plan.getActualCount() + " 题");
+                System.out.println("  进度: " + bar);
+                System.out.println("  实际完成: " + actual + " 题");
+                if (actual >= plan.getTargetCount()) {
+                    ConsoleUtil.printSuccess("今日目标已完成！🎉");
+                }
                 if (plan.getNote() != null) {
                     System.out.println("  备注: " + plan.getNote());
                 }

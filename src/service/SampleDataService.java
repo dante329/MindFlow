@@ -169,6 +169,67 @@ public class SampleDataService {
                 "{\"1\":\"富强\",\"2\":\"民主\",\"3\":\"文明\",\"4\":\"和谐\"}",
                 "国家层面：富强、民主、文明、和谐；社会层面：自由、平等、公正、法治；个人层面：爱国、敬业、诚信、友善。");
 
+        // --- 补充选择题 ---
+        count += addChoice(subjectId, 2,
+                "哲学的基本问题是",
+                "思维和存在的关系问题", "运动和静止的关系问题", "量变和质变的关系问题", "理论和实践的关系问题",
+                "A", "恩格斯指出，全部哲学特别是近代哲学的重大基本问题是思维和存在的关系问题。");
+
+        count += addChoice(subjectId, 3,
+                "认识的两次飞跃是指",
+                "从感性认识到理性认识，再从理性认识到实践", "从实践到认识，再从认识到实践", "从现象到本质，再从本质到现象", "从具体到抽象，再从抽象到具体",
+                "A", "第一次飞跃是从感性认识到理性认识，第二次飞跃是从理性认识到实践。第二次飞跃比第一次更重要。");
+
+        count += addChoice(subjectId, 2,
+                "生产力中最活跃的因素是",
+                "劳动者", "劳动资料", "劳动对象", "科学技术",
+                "A", "劳动者是生产力中最活跃的因素。科学技术是第一生产力，但需要通过劳动者来发挥作用。");
+
+        count += addChoice(subjectId, 3,
+                "我国的基本经济制度是",
+                "公有制为主体、多种所有制经济共同发展", "全民所有制经济", "集体所有制经济", "私有制经济",
+                "A", "党的十九届四中全会将公有制为主体、多种所有制经济共同发展，按劳分配为主体、多种分配方式并存，社会主义市场经济体制都列为基本经济制度。");
+
+        count += addChoice(subjectId, 2,
+                "毛泽东思想的活的灵魂是",
+                "实事求是、群众路线、独立自主", "解放思想、实事求是、与时俱进", "理论联系实际、密切联系群众、批评与自我批评", "统一战线、武装斗争、党的建设",
+                "A", "实事求是、群众路线、独立自主是毛泽东思想的活的灵魂的三个基本方面。注意D选项是三大法宝。");
+
+        count += addChoice(subjectId, 4,
+                "垄断利润的来源是",
+                "工人创造的剩余价值和其他劳动者创造的一部分价值", "垄断资本家的先进管理", "垄断组织的技术优势", "市场价格波动",
+                "A", "垄断利润归根到底来源于工人创造的剩余价值和其他劳动者创造的一部分价值。");
+
+        count += addChoice(subjectId, 3,
+                "\"三个代表\"重要思想的核心观点是",
+                "中国共产党必须始终代表中国先进生产力的发展要求、代表中国先进文化的前进方向、代表中国最广大人民的根本利益",
+                "坚持以人为本、全面协调可持续发展", "建设社会主义和谐社会", "全面建设小康社会",
+                "A", "这是江泽民提出的，2002年写入党章。");
+
+        count += addChoice(subjectId, 2,
+                "科学发展观的第一要义是",
+                "发展", "以人为本", "全面协调可持续", "统筹兼顾",
+                "A", "科学发展观：第一要义是发展，核心是以人为本，基本要求是全面协调可持续，根本方法是统筹兼顾。");
+
+        // --- 补充判断题 ---
+        count += addTrueFalse(subjectId, 2,
+                "否定之否定规律揭示了事物发展的方向和道路。", "T",
+                "否定之否定规律揭示了事物发展的前进性与曲折性的统一，表明事物发展的方向是前进的，道路是曲折的。");
+
+        count += addTrueFalse(subjectId, 3,
+                "上层建筑对经济基础总是起促进作用。", "F",
+                "当上层建筑为先进的经济基础服务时起促进作用，为落后的经济基础服务时起阻碍作用。");
+
+        count += addTrueFalse(subjectId, 2,
+                "帝国主义是资本主义的最高阶段。", "T",
+                "列宁在《帝国主义是资本主义的最高阶段》中指出，帝国主义是垄断的、腐朽的、垂死的资本主义。");
+
+        // --- 补充填空题 ---
+        count += addFillBlank(subjectId, 2,
+                "党的三大优良作风是____、____和____。",
+                "{\"1\":\"理论联系实际\",\"2\":\"密切联系群众\",\"3\":\"批评与自我批评\"}",
+                "毛泽东在党的七大上总结了党的三大优良作风。");
+
         return count;
     }
 
@@ -260,6 +321,61 @@ public class SampleDataService {
                 "{\"1\":\"did\",\"2\":\"finish\"}",
                 "Not only 置于句首时，该分句需部分倒装。根据后半句 helped 可知用一般过去时，故用 did... finish。");
 
+        // --- 补充选择题 ---
+        count += addChoice(subjectId, 2,
+                "I would rather you ____ anything about it for the time being.\n(我宁愿你暂时不要对此事做任何表态。)",
+                "don't do", "didn't do", "won't do", "not do",
+                "B", "would rather 后接宾语从句时用虚拟语气，对现在/将来的情况用一般过去时。");
+
+        count += addChoice(subjectId, 3,
+                "It is high time that we ____ a meeting to discuss the problem.\n(我们早该开会讨论这个问题了。)",
+                "hold", "held", "have held", "will hold",
+                "B", "It is (high/about) time that... 后面的从句用虚拟语气，动词用一般过去时或 should + 动词原形。");
+
+        count += addChoice(subjectId, 2,
+                "The number of students in our school ____ increasing year by year.\n(我们学校的学生人数逐年增加。)",
+                "is", "are", "were", "have been",
+                "A", "the number of + 复数名词作主语时，谓语动词用单数。注意区分 a number of（许多）后接复数动词。");
+
+        count += addChoice(subjectId, 3,
+                "______ she couldn't understand was _____ fewer and fewer students showed interest in her lessons.\n(她无法理解的是为什么越来越少的学生对她的课感兴趣。)",
+                "What; why", "That; what", "What; because", "Why; that",
+                "A", "第一个空是主语从句缺宾语用 what，第二个空是表语从句表示原因用 why。");
+
+        count += addChoice(subjectId, 4,
+                "Under no circumstances ____ leave the door unlocked.\n(在任何情况下都不要忘记锁门。)",
+                "you should", "should you", "you will", "will you",
+                "B", "Under no circumstances 是否定短语置于句首，需要部分倒装，将情态动词 should 提前。");
+
+        count += addChoice(subjectId, 2,
+                "He is the only one of the students who ____ been to Beijing.\n(他是学生中唯一去过北京的人。)",
+                "has", "have", "had", "having",
+                "A", "the only one of + 复数名词 + who 定语从句，who 指代 the only one（单数），谓语用 has。");
+
+        count += addChoice(subjectId, 3,
+                "The professor, along with his assistants, ____ working on the project day and night.\n(教授和他的助手们日夜不停地在这个项目上工作。)",
+                "is", "are", "were", "have been",
+                "A", "along with / together with / as well as 连接主语时，谓语动词与前面的主语一致。professor 是单数，用 is。");
+
+        // --- 补充判断题 ---
+        count += addTrueFalse(subjectId, 2,
+                "\"There goes the bell.\" 这句话语法正确。", "T",
+                "这是完全倒装句，here/there 置于句首且主语是名词时，句子完全倒装。如果主语是代词则不倒装：There it goes.");
+
+        count += addTrueFalse(subjectId, 3,
+                "\"I don't know what is his name.\" 这句话语法正确。", "F",
+                "宾语从句必须用陈述语序，应改为 I don't know what his name is.");
+
+        count += addTrueFalse(subjectId, 2,
+                "\"Every boy and every girl has the right to education.\" 这句话语法正确。", "T",
+                "every... and every... 连接主语时，谓语动词用单数。类似的还有 each... and each..., no... and no... 等。");
+
+        // --- 补充填空题 ---
+        count += addFillBlank(subjectId, 3,
+                "If it ____ (rain) tomorrow, the sports meeting ____ (put) off.",
+                "{\"1\":\"rains / should rain / were to rain\",\"2\":\"would be put / will be put\"}",
+                "对将来情况的虚拟条件句，if 从句可用一般现在时/should+动词原形/were to+动词原形，主句用 would/should/could/might + 动词原形。此处运动会是被推迟，用被动。");
+
         return count;
     }
 
@@ -321,6 +437,61 @@ public class SampleDataService {
                 "设 f(x) = eˣ · sinx，则 f'(x) = ____",
                 "{\"1\":\"eˣ(sinx + cosx)\"}",
                 "乘法法则：f'(x) = eˣ·sinx + eˣ·cosx = eˣ(sinx + cosx)。");
+
+        // --- 补充选择题 ---
+        count += addChoice(subjectId, 2,
+                "函数 f(x) = ln(x² + 1) 的导数 f'(x) =",
+                "2x/(x²+1)", "1/(x²+1)", "2x·ln(x²+1)", "(x²+1)/2x",
+                "A", "复合函数求导：f'(x) = 1/(x²+1) · 2x = 2x/(x²+1)。");
+
+        count += addChoice(subjectId, 3,
+                "设 A 是 n 阶方阵，若 A² = A，则下列说法正确的是",
+                "A 的特征值只能是 0 或 1", "A 一定是单位矩阵", "A 一定是零矩阵", "A 一定可逆",
+                "A", "若 λ 是 A 的特征值，则 λ² = λ，解得 λ = 0 或 λ = 1。A²=A 称为幂等矩阵。");
+
+        count += addChoice(subjectId, 2,
+                "定积分 ∫(0 to π) sinx dx =",
+                "2", "0", "1", "π",
+                "A", "∫(0 to π) sinx dx = [-cosx](0 to π) = -cosπ - (-cos0) = -(-1) - (-1) = 2。");
+
+        count += addChoice(subjectId, 4,
+                "设 X 和 Y 相互独立，D(X)=4, D(Y)=9，则 D(2X-3Y) =",
+                "97", "55", "25", "1",
+                "A", "D(2X-3Y) = 4D(X) + 9D(Y) = 4×4 + 9×9 = 16 + 81 = 97。注意独立时方差相加，系数要平方。");
+
+        count += addChoice(subjectId, 3,
+                "微分方程 y' + y = 0 的通解为",
+                "y = Ce⁻ˣ", "y = Ceˣ", "y = Cx", "y = C + e⁻ˣ",
+                "A", "这是一阶线性齐次方程，分离变量 dy/y = -dx，积分得 lny = -x + C₁，即 y = Ce⁻ˣ。");
+
+        count += addChoice(subjectId, 2,
+                "向量 α=(1,2,3) 与 β=(4,5,6) 的点积 α·β =",
+                "32", "21", "15", "42",
+                "A", "α·β = 1×4 + 2×5 + 3×6 = 4 + 10 + 18 = 32。");
+
+        // --- 补充判断题 ---
+        count += addTrueFalse(subjectId, 2,
+                "若函数 f(x) 在 [a,b] 上连续，则 f(x) 在 [a,b] 上一定有最大值和最小值。", "T",
+                "这是闭区间上连续函数的最值定理（极值定理）。注意必须是闭区间且连续，开区间不一定成立。");
+
+        count += addTrueFalse(subjectId, 3,
+                "n 阶矩阵 A 有 n 个不同的特征值，则 A 一定可以对角化。", "T",
+                "n 阶矩阵有 n 个不同特征值，则有 n 个线性无关的特征向量，故可对角化。但反过来不成立，有重特征值的矩阵也可能对角化。");
+
+        count += addTrueFalse(subjectId, 2,
+                "若 lim(n→∞) aₙ = 0，则级数 Σaₙ 一定收敛。", "F",
+                "通项趋于零只是级数收敛的必要条件而非充分条件。反例：调和级数 Σ(1/n)，通项趋于零但级数发散。");
+
+        // --- 补充填空题 ---
+        count += addFillBlank(subjectId, 2,
+                "lim(x→0) (eˣ - 1)/x = ____",
+                "{\"1\":\"1\"}",
+                "这是重要极限之一。可用洛必达法则：分子分母分别求导得 eˣ/1，令 x→0 得 1。也可用等价无穷小 eˣ-1 ~ x。");
+
+        count += addFillBlank(subjectId, 3,
+                "设 z = x²y + y³，则 ∂z/∂x = ____，∂z/∂y = ____",
+                "{\"1\":\"2xy\",\"2\":\"x² + 3y²\"}",
+                "偏导数：对 x 求偏导时把 y 当常数，∂z/∂x = 2xy；对 y 求偏导时把 x 当常数，∂z/∂y = x² + 3y²。");
 
         return count;
     }
