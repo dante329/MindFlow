@@ -34,3 +34,5 @@ bin/
 ### Project ###
 mindflow.db
 exports/
+*.docx
+*.doc
