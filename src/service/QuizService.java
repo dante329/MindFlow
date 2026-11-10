@@ -106,9 +106,9 @@ public class QuizService {
             // 显示结果
             if (isCorrect) {
                 correctCount++;
-                ConsoleUtil.printSuccess("回答正确！ ✓");
+                ConsoleUtil.printSuccess("回答正确！ ✓ (" + String.format("%.1f", elapsed / 1000.0) + "秒)");
             } else {
-                ConsoleUtil.printError("回答错误 ✗");
+                ConsoleUtil.printError("回答错误 ✗ (" + String.format("%.1f", elapsed / 1000.0) + "秒)");
                 System.out.println(strategy.getCorrectAnswerDisplay(q));
             }
 
