@@ -49,24 +49,31 @@ public class SampleDataService {
         ConsoleUtil.printInfo("检测到题库为空，正在导入示例题目...");
 
         // 找到各科目的 ID
-        Integer politicsId = null, englishId = null, mathId = null;
+        Integer politicsId = null, englishId = null, mathId = null, majorId = null;
         for (Subject s : subjects) {
             switch (s.getName()) {
                 case "政治" -> politicsId = s.getSubjectId();
                 case "英语" -> englishId = s.getSubjectId();
                 case "数学" -> mathId = s.getSubjectId();
+                case "专业课" -> majorId = s.getSubjectId();
             }
         }
 
         int count = 0;
         if (politicsId != null) {
             count += loadPoliticsQuestions(politicsId);
+            count += loadPoliticsExtra(politicsId);
         }
         if (englishId != null) {
             count += loadEnglishQuestions(englishId);
+            count += loadEnglishExtra(englishId);
         }
         if (mathId != null) {
             count += loadMathQuestions(mathId);
+            count += loadMathExtra(mathId);
+        }
+        if (majorId != null) {
+            count += loadMajorQuestions(majorId);
         }
 
         ConsoleUtil.printSuccess("示例数据导入完成！共导入 " + count + " 道题目");
@@ -492,6 +499,168 @@ public class SampleDataService {
                 "设 z = x²y + y³，则 ∂z/∂x = ____，∂z/∂y = ____",
                 "{\"1\":\"2xy\",\"2\":\"x² + 3y²\"}",
                 "偏导数：对 x 求偏导时把 y 当常数，∂z/∂x = 2xy；对 y 求偏导时把 x 当常数，∂z/∂y = x² + 3y²。");
+
+        return count;
+    }
+
+    // ==================== 政治补充题 ====================
+
+    private int loadPoliticsExtra(int subjectId) {
+        int count = 0;
+        count += addChoice(subjectId, 3, "构建人类命运共同体理念的核心是",
+                "建设持久和平、普遍安全、共同繁荣、开放包容、清洁美丽的世界",
+                "实现全球经济一体化", "建立国际军事同盟", "推行西方民主制度",
+                "A", "习近平提出的人类命运共同体理念，核心是建设五个世界。");
+        count += addChoice(subjectId, 2, "中国共产党人的初心和使命是",
+                "为中国人民谋幸福，为中华民族谋复兴", "实现共产主义", "全面建成小康社会", "实现中华民族伟大复兴的中国梦",
+                "A", "党的十九大报告指出，中国共产党人的初心和使命就是为中国人民谋幸福，为中华民族谋复兴。");
+        count += addTrueFalse(subjectId, 2, "量变是质变的必要准备，质变是量变的必然结果。", "T",
+                "这是量变质变规律的基本内容。量变积累到一定程度必然引起质变，质变又为新的量变开辟道路。");
+        count += addTrueFalse(subjectId, 3, "经济基础决定上层建筑，上层建筑反作用于经济基础。", "T",
+                "这是历史唯物主义的基本原理。上层建筑的反作用可以是促进也可以是阻碍，取决于它是否适应经济基础。");
+        count += addFillBlank(subjectId, 2, "四个自信是指____、____、____和____。",
+                "{\"1\":\"道路自信\",\"2\":\"理论自信\",\"3\":\"制度自信\",\"4\":\"文化自信\"}",
+                "习近平总书记提出的四个自信，是对中国特色社会主义的信念。");
+        count += addChoice(subjectId, 2, "马克思主义中国化的最新成果是",
+                "习近平新时代中国特色社会主义思想", "邓小平理论", "三个代表重要思想", "科学发展观",
+                "A", "习近平新时代中国特色社会主义思想是马克思主义中国化最新成果，是党和人民实践经验和集体智慧的结晶。");
+        count += addChoice(subjectId, 3, "资本积累的实质是",
+                "资本家把剩余价值的一部分转化为资本", "资本家节约消费", "技术进步", "扩大市场需求",
+                "A", "资本积累就是把剩余价值再转化为资本，即剩余价值的资本化。");
+        return count;
+    }
+
+    // ==================== 英语补充题 ====================
+
+    private int loadEnglishExtra(int subjectId) {
+        int count = 0;
+        count += addChoice(subjectId, 2, "By the time you get back, I ____ finished all the work.\n(等你回来的时候，我就已经完成所有工作了。)",
+                "will have", "have", "had", "will",
+                "A", "By the time + 一般现在时，主句用将来完成时 will have done，表示在将来某时刻之前已完成的动作。");
+        count += addChoice(subjectId, 3, "The reason ____ he gave for his absence is ____ he was ill.\n(他给出的缺席理由是他生病了。)",
+                "that; that", "why; that", "that; because", "why; because",
+                "A", "第一个空是定语从句修饰reason，在从句中作gave的宾语，用that；第二个空是表语从句，用that引导。注意the reason why...is that...和the reason that...is that...的区别。");
+        count += addTrueFalse(subjectId, 2, "\"She is one of those people who always keeps their promises.\" 这句话语法正确。", "F",
+                "who引导的定语从句修饰those people（复数），谓语应该用keep而不是keeps。应改为who always keep their promises。");
+        count += addChoice(subjectId, 2, "I'll never forget the day ____ I joined the Party.\n(我永远不会忘记我入党的那一天。)",
+                "when", "which", "that", "where",
+                "A", "先行词the day在定语从句中作时间状语，用关系副词when引导。");
+        count += addFillBlank(subjectId, 2, "It is essential that every student ____ (attend) the meeting.",
+                "{\"1\":\"(should) attend\"}",
+                "It is essential/important/necessary that... 后面的从句用虚拟语气 (should) + 动词原形。");
+        count += addChoice(subjectId, 3, "So absorbed ____ in her work that she didn't notice it was time to go home.\n(她太专注于工作了，以至于没注意到该回家了。)",
+                "she was", "was she", "she had been", "had she been",
+                "B", "So + adj. 置于句首时，主句需要部分倒装。So absorbed was she... = She was so absorbed...");
+        count += addTrueFalse(subjectId, 2, "\"Neither you nor I am wrong.\" 这句话语法正确。", "T",
+                "Neither...nor...连接主语时遵循就近原则，I离谓语最近，所以用am。");
+        return count;
+    }
+
+    // ==================== 数学补充题 ====================
+
+    private int loadMathExtra(int subjectId) {
+        int count = 0;
+        count += addChoice(subjectId, 2, "设 f(x) = x³ - 6x² + 9x + 1，则 f(x) 的极大值为",
+                "5", "1", "3", "7",
+                "A", "f'(x) = 3x²-12x+9 = 3(x-1)(x-3)，令f'(x)=0得x=1,x=3。f''(1)=-6<0故x=1是极大值点，f(1)=1-6+9+1=5。");
+        count += addChoice(subjectId, 3, "设 A 为 3×3 矩阵，r(A)=2，则齐次方程组 Ax=0 的基础解系含有几个向量",
+                "1", "2", "3", "0",
+                "A", "基础解系含 n-r(A) = 3-2 = 1 个线性无关的解向量。");
+        count += addTrueFalse(subjectId, 2, "若 f(x) 在 x₀ 处取得极值且 f'(x₀) 存在，则 f'(x₀) = 0。", "T",
+                "这是费马定理。可导函数在极值点处的导数为零。但反过来不成立，f'(x₀)=0不一定是极值点。");
+        count += addFillBlank(subjectId, 2, "∫(0 to 1) x·eˣ dx = ____",
+                "{\"1\":\"1\"}",
+                "分部积分：∫xeˣdx = xeˣ - ∫eˣdx = xeˣ - eˣ + C = eˣ(x-1) + C。代入上下限：e(1-1) - e⁰(0-1) = 0-(-1) = 1。");
+        count += addChoice(subjectId, 3, "随机变量 X~B(10, 0.3)，则 E(X) 和 D(X) 分别为",
+                "3 和 2.1", "3 和 0.9", "7 和 2.1", "0.3 和 0.21",
+                "A", "二项分布 B(n,p)：E(X)=np=10×0.3=3，D(X)=np(1-p)=10×0.3×0.7=2.1。");
+        count += addTrueFalse(subjectId, 3, "若级数 Σ|aₙ| 收敛，则级数 Σaₙ 一定收敛。", "T",
+                "绝对收敛必收敛。这是级数理论的基本定理。反过来不成立，条件收敛的级数 Σaₙ 收敛但 Σ|aₙ| 发散。");
+        count += addChoice(subjectId, 2, "曲线 y = x² 在点 (1,1) 处的切线方程为",
+                "y = 2x - 1", "y = 2x + 1", "y = x - 1", "y = x + 1",
+                "A", "y' = 2x，在x=1处斜率为2。切线方程：y-1 = 2(x-1)，即 y = 2x-1。");
+        count += addChoice(subjectId, 3, "设随机变量 X 的概率密度为 f(x)=2x (0<x<1)，则 P(X>0.5) =",
+                "0.75", "0.5", "0.25", "1",
+                "A", "P(X>0.5) = ∫(0.5 to 1) 2x dx = [x²](0.5 to 1) = 1 - 0.25 = 0.75。");
+        count += addTrueFalse(subjectId, 2, "矩阵的行列式等于其转置矩阵的行列式。", "T",
+                "|A| = |Aᵀ|，这是行列式的基本性质。");
+        count += addFillBlank(subjectId, 3, "微分方程 y'' - 4y = 0 的通解为 y = ____",
+                "{\"1\":\"C₁e²ˣ + C₂e⁻²ˣ\"}",
+                "特征方程 r²-4=0，r=±2，通解 y=C₁e²ˣ+C₂e⁻²ˣ。");
+        count += addChoice(subjectId, 2, "∫sin²x dx =",
+                "x/2 - sin(2x)/4 + C", "-cos²x + C", "sin²x/2 + C", "-cos(2x)/2 + C",
+                "A", "用半角公式 sin²x = (1-cos2x)/2，积分得 x/2 - sin(2x)/4 + C。");
+        count += addTrueFalse(subjectId, 3, "若 A 和 B 都是 n 阶可逆矩阵，则 (AB)⁻¹ = B⁻¹A⁻¹。", "T",
+                "矩阵乘积的逆等于各矩阵逆的反序乘积。注意顺序不能颠倒，因为矩阵乘法不满足交换律。");
+        count += addChoice(subjectId, 4, "设 X₁,X₂,...,Xₙ 是来自总体 N(μ,σ²) 的简单随机样本，则样本均值 X̄ 服从",
+                "N(μ, σ²/n)", "N(μ, σ²)", "N(nμ, σ²)", "N(μ, nσ²)",
+                "A", "样本均值的期望 E(X̄)=μ，方差 D(X̄)=σ²/n，故 X̄~N(μ,σ²/n)。");
+        return count;
+    }
+
+    // ==================== 专业课题目（计算机408风格） ====================
+
+    private int loadMajorQuestions(int subjectId) {
+        int count = 0;
+
+        // 数据结构
+        count += addChoice(subjectId, 2, "一棵完全二叉树有 100 个结点，则叶子结点的个数为",
+                "50", "51", "49", "100",
+                "A", "完全二叉树中，n₀ = n₂ + 1。100个结点中 n₁=0或1，这里 n=100 为偶数所以 n₁=1，n₀+n₁+n₂=100，n₀=n₂+1，解得 n₀=50。");
+
+        count += addChoice(subjectId, 3, "对 n 个元素进行快速排序，最坏情况下的时间复杂度为",
+                "O(n²)", "O(nlogn)", "O(n)", "O(logn)",
+                "A", "快排平均 O(nlogn)，但最坏情况（每次划分极不平衡，如已有序数组）退化为 O(n²)。");
+
+        count += addChoice(subjectId, 2, "在一个长度为 n 的顺序表中，插入一个元素的平均移动次数为",
+                "n/2", "n", "n-1", "(n+1)/2",
+                "A", "在位置 i 插入需移动 n-i 个元素，i 从 0 到 n 等概率，平均移动 n/2 次。");
+
+        count += addTrueFalse(subjectId, 2, "栈和队列都是操作受限的线性表。", "T",
+                "栈只允许在一端（栈顶）进行插入和删除，队列只允许在一端插入另一端删除，都是操作受限的线性表。");
+
+        count += addTrueFalse(subjectId, 3, "哈希表的查找时间复杂度一定是 O(1)。", "F",
+                "哈希表在理想情况下（无冲突或冲突很少）查找为 O(1)，但最坏情况下（所有元素都冲突到同一个位置）退化为 O(n)。");
+
+        // 操作系统
+        count += addChoice(subjectId, 2, "进程和线程的主要区别是",
+                "进程是资源分配的单位，线程是调度的单位", "进程比线程执行速度快", "线程不能共享内存", "一个进程只能有一个线程",
+                "A", "进程是操作系统资源分配的基本单位，线程是CPU调度的基本单位。同一进程的线程共享地址空间。");
+
+        count += addChoice(subjectId, 3, "下列页面置换算法中，可能产生 Belady 异常的是",
+                "FIFO", "LRU", "OPT", "LFU",
+                "A", "Belady 异常是指增加物理页框数反而导致缺页率上升。只有 FIFO 算法可能出现这种现象，LRU 和 OPT 属于栈算法不会出现。");
+
+        count += addTrueFalse(subjectId, 2, "死锁的四个必要条件是互斥、占有并等待、不可剥夺和循环等待。", "T",
+                "这四个条件必须同时满足才会发生死锁，破坏其中任何一个就可以预防死锁。");
+
+        // 计算机网络
+        count += addChoice(subjectId, 2, "TCP 三次握手的目的是",
+                "确认双方的发送和接收能力都正常", "加密通信数据", "分配 IP 地址", "建立路由表",
+                "A", "三次握手确保双方都知道对方能发也能收：第一次确认客户端发送正常，第二次确认服务端接收和发送正常，第三次确认客户端接收正常。");
+
+        count += addChoice(subjectId, 3, "HTTP 协议默认使用的端口号是",
+                "80", "443", "21", "25",
+                "A", "HTTP 默认端口 80，HTTPS 默认端口 443，FTP 默认端口 21，SMTP 默认端口 25。");
+
+        count += addTrueFalse(subjectId, 2, "IP 协议提供的是可靠的、面向连接的数据传输服务。", "F",
+                "IP 协议提供的是不可靠的、无连接的数据报传输服务。可靠性由上层的 TCP 协议来保证。");
+
+        // 计算机组成原理
+        count += addChoice(subjectId, 2, "Cache 的地址映射方式中，冲突概率最低的是",
+                "全相联映射", "直接映射", "组相联映射", "随机映射",
+                "A", "全相联映射允许主存块放到 Cache 的任意位置，冲突概率最低但硬件成本高。直接映射冲突最多，组相联是折中方案。");
+
+        count += addChoice(subjectId, 3, "某计算机字长 32 位，按字节编址，主存容量 4GB，则主存地址寄存器至少需要多少位",
+                "32", "16", "64", "8",
+                "A", "4GB = 2³² 字节，按字节编址需要 32 位地址线来寻址。");
+
+        count += addFillBlank(subjectId, 2, "OSI 七层模型从下到上依次是物理层、数据链路层、____、传输层、会话层、表示层和____。",
+                "{\"1\":\"网络层\",\"2\":\"应用层\"}",
+                "OSI 七层：物理层→数据链路层→网络层→传输层→会话层→表示层→应用层。记忆口诀：物数网传会表应。");
+
+        count += addTrueFalse(subjectId, 3, "虚拟存储器的最大容量由计算机的地址结构决定，与实际内存大小无关。", "T",
+                "虚拟存储器的最大容量取决于 CPU 的地址位数（如 32 位系统最大 4GB），实际容量取虚存最大容量与内存+外存之和的较小值。");
 
         return count;
     }
