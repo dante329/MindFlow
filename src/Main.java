@@ -154,7 +154,7 @@ public class Main {
         if (ConsoleUtil.confirm("是否现在填写考研目标信息？")) {
             String school = ConsoleUtil.readLine("目标院校");
             String major = ConsoleUtil.readLine("目标专业");
-            String examDate = ConsoleUtil.readLine("考试日期 (yyyy-MM-dd)");
+            String examDate = ConsoleUtil.readExamDate("考研年份");
             UserService.getInstance().updateProfile(nickname, school, major, examDate);
         }
 
@@ -338,7 +338,7 @@ public class Main {
                 String nickname = ConsoleUtil.readLine("新昵称（留空不修改）");
                 String school = ConsoleUtil.readLine("目标院校");
                 String major = ConsoleUtil.readLine("目标专业");
-                String examDate = ConsoleUtil.readLine("考试日期 (yyyy-MM-dd)");
+                String examDate = ConsoleUtil.readExamDate("考研年份");
                 UserService.getInstance().updateProfile(
                         nickname.isEmpty() ? null : nickname, school, major, examDate);
                 ConsoleUtil.pause();

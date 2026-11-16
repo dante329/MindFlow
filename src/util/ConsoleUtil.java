@@ -144,6 +144,54 @@ public class ConsoleUtil {
     }
 
     /**
+     * 读取考研年份并推算考试日期。
+     * 用户输入如 "27"、"27考研"、"2027"，自动推算为当年12月最后一个周六的日期。
+     *
+     * @param prompt 提示文字
+     * @return yyyy-MM-dd 格式的考试日期字符串
+     */
+    public static String readExamDate(String prompt) {
+        while (true) {
+            String input = readLine(prompt + " (如: 27考研)");
+            // 提取数字部分
+            String digits = input.replaceAll("[^0-9]", "");
+            if (digits.isEmpty()) {
+                printError("请输入考研年份，如 27 或 27考研");
+                continue;
+            }
+            int yearNum = Integer.parseInt(digits);
+            // 支持两位数和四位数
+            int examYear;
+            if (yearNum >= 2000) {
+                examYear = yearNum;      // 2027 → 2027考研，考试在2026年12月
+            } else if (yearNum >= 20 && yearNum <= 99) {
+                examYear = 2000 + yearNum; // 27 → 2027考研
+            } else {
+                printError("年份格式不对，请输入如 27 或 2027");
+                continue;
+            }
+            // N年考研 → 初试在 N-1 年12月最后一个周六
+            int testYear = examYear - 1;
+            String date = calcLastSaturdayOfDecember(testYear);
+            printInfo(examYear + "考研 → 初试日期: " + date);
+            return date;
+        }
+    }
+
+    /**
+     * 计算某年12月最后一个周六的日期（考研初试日）。
+     */
+    private static String calcLastSaturdayOfDecember(int year) {
+        // 12月31日是周几
+        java.time.LocalDate dec31 = java.time.LocalDate.of(year, 12, 31);
+        int dow = dec31.getDayOfWeek().getValue(); // 1=Mon ... 7=Sun
+        // 周六=6，往前推 (dow - 6 + 7) % 7 天
+        int daysBack = (dow - 6 + 7) % 7;
+        java.time.LocalDate lastSat = dec31.minusDays(daysBack);
+        return lastSat.toString(); // yyyy-MM-dd
+    }
+
+    /**
      * 从菜单中选择一项，返回 1-based 索引
      */
     public static int selectFromMenu(String[] options) {
