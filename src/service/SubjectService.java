@@ -122,7 +122,10 @@ public class SubjectService {
         String[] options = subjects.stream()
                 .map(s -> s.getName() + " (" + questionDao.countBySubject(s.getSubjectId()) + "题)")
                 .toArray(String[]::new);
-        int choice = ConsoleUtil.selectFromMenu(options);
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+        if (choice == 0) {
+            throw new BusinessException("已取消选择");
+        }
         return subjects.get(choice - 1);
     }
 

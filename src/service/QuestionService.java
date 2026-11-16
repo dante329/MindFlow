@@ -71,7 +71,12 @@ public class QuestionService {
         ConsoleUtil.printHeader("添加题目");
 
         String[] types = {"选择题", "判断题", "填空题"};
-        int typeChoice = ConsoleUtil.selectFromMenu(types);
+        int typeChoice = ConsoleUtil.selectFromMenuWithBack(types);
+
+        if (typeChoice == 0) {
+            ConsoleUtil.printInfo("已取消添加");
+            return;
+        }
 
         String content = ConsoleUtil.readLine("题目内容");
         int difficulty = ConsoleUtil.readInt("难度 (1-5)", 1, 5);

@@ -158,7 +158,7 @@ public class Main {
         if (ConsoleUtil.confirm("是否现在填写考研目标信息？")) {
             String school = ConsoleUtil.readLine("目标院校");
             String major = ConsoleUtil.readLine("目标专业");
-            String examDate = ConsoleUtil.readExamDate("考研年份");
+            String examDate = ConsoleUtil.readExamDate("考试年份");
             UserService.getInstance().updateProfile(nickname, school, major, examDate);
         }
 
@@ -182,7 +182,9 @@ public class Main {
         Subject subject = SubjectService.getInstance().selectSubject();
 
         String[] modes = {"随机练习", "按题型练习", "错题重做"};
-        int modeChoice = ConsoleUtil.selectFromMenu(modes);
+        int modeChoice = ConsoleUtil.selectFromMenuWithBack(modes);
+
+        if (modeChoice == 0) return;
 
         String mode = switch (modeChoice) {
             case 1 -> "random";
@@ -201,8 +203,10 @@ public class Main {
     private static void handleQuestionManage() {
         Subject subject = SubjectService.getInstance().selectSubject();
 
-        String[] options = {"查看题目列表", "添加题目", "搜索题目", "返回"};
-        int choice = ConsoleUtil.selectFromMenu(options);
+        String[] options = {"查看题目列表", "添加题目", "搜索题目"};
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+
+        if (choice == 0) return;
 
         switch (choice) {
             case 1 -> {
@@ -230,8 +234,10 @@ public class Main {
     // ==================== 错题本 ====================
 
     private static void handleWrongBook() {
-        String[] options = {"查看所有错题", "查看未掌握错题", "错题统计", "返回"};
-        int choice = ConsoleUtil.selectFromMenu(options);
+        String[] options = {"查看所有错题", "查看未掌握错题", "错题统计"};
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+
+        if (choice == 0) return;
 
         switch (choice) {
             case 1 -> {
@@ -252,8 +258,10 @@ public class Main {
     // ==================== 每日计划 ====================
 
     private static void handleDailyPlan() {
-        String[] options = {"今日概览", "制定今日计划", "最近7天记录", "返回"};
-        int choice = ConsoleUtil.selectFromMenu(options);
+        String[] options = {"今日概览", "制定今日计划", "最近7天记录"};
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+
+        if (choice == 0) return;
 
         switch (choice) {
             case 1 -> {
@@ -274,8 +282,10 @@ public class Main {
     // ==================== 学习统计 ====================
 
     private static void handleStatistics() {
-        String[] options = {"统计面板", "导出报告", "返回"};
-        int choice = ConsoleUtil.selectFromMenu(options);
+        String[] options = {"统计面板", "导出报告"};
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+
+        if (choice == 0) return;
 
         switch (choice) {
             case 1 -> {
@@ -292,8 +302,10 @@ public class Main {
     // ==================== 科目管理 ====================
 
     private static void handleSubjectManage() {
-        String[] options = {"查看科目", "添加科目", "管理知识点", "返回"};
-        int choice = ConsoleUtil.selectFromMenu(options);
+        String[] options = {"查看科目", "添加科目", "管理知识点"};
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+
+        if (choice == 0) return;
 
         switch (choice) {
             case 1 -> {
@@ -331,15 +343,17 @@ public class Main {
         System.out.println("  考试日期: " + (user.getExamDate() != null ? user.getExamDate() : "未设置"));
         System.out.println();
 
-        String[] options = {"修改个人信息", "修改密码", "返回"};
-        int choice = ConsoleUtil.selectFromMenu(options);
+        String[] options = {"修改个人信息", "修改密码"};
+        int choice = ConsoleUtil.selectFromMenuWithBack(options);
+
+        if (choice == 0) return;
 
         switch (choice) {
             case 1 -> {
                 String nickname = ConsoleUtil.readLine("新昵称（留空不修改）");
                 String school = ConsoleUtil.readLine("目标院校");
                 String major = ConsoleUtil.readLine("目标专业");
-                String examDate = ConsoleUtil.readExamDate("考研年份");
+                String examDate = ConsoleUtil.readExamDate("考试年份");
                 UserService.getInstance().updateProfile(
                         nickname.isEmpty() ? null : nickname, school, major, examDate);
                 ConsoleUtil.pause();

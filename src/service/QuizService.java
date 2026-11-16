@@ -57,7 +57,11 @@ public class QuizService {
             }
             case "by_type" -> {
                 String[] types = {"选择题", "判断题", "填空题"};
-                int typeChoice = ConsoleUtil.selectFromMenu(types);
+                int typeChoice = ConsoleUtil.selectFromMenuWithBack(types);
+                if (typeChoice == 0) {
+                    ConsoleUtil.printInfo("已取消练习");
+                    return;
+                }
                 String typeCode = switch (typeChoice) {
                     case 1 -> "CHOICE";
                     case 2 -> "TRUE_FALSE";

@@ -144,36 +144,27 @@ public class ConsoleUtil {
     }
 
     /**
-     * 读取考研年份并推算考试日期。
-     * 用户输入如 "27"、"27考研"、"2027"，自动推算为当年12月最后一个周六的日期。
+     * 读取考试年份并推算初试日期。
+     * 用户直接输入四位考试年份（如 2027），初试为该年12月最后一个周六。
      *
      * @param prompt 提示文字
-     * @return yyyy-MM-dd 格式的考试日期字符串
+     * @return yyyy-MM-dd 格式的初试日期字符串
      */
     public static String readExamDate(String prompt) {
         while (true) {
-            String input = readLine(prompt + " (如: 27考研)");
-            // 提取数字部分
+            String input = readLine(prompt + " (如: 2027)");
             String digits = input.replaceAll("[^0-9]", "");
             if (digits.isEmpty()) {
-                printError("请输入考研年份，如 27 或 27考研");
+                printError("请输入四位考试年份，如 2027");
                 continue;
             }
-            int yearNum = Integer.parseInt(digits);
-            // 支持两位数和四位数
-            int examYear;
-            if (yearNum >= 2000) {
-                examYear = yearNum;      // 2027 → 2027考研，考试在2026年12月
-            } else if (yearNum >= 20 && yearNum <= 99) {
-                examYear = 2000 + yearNum; // 27 → 2027考研
-            } else {
-                printError("年份格式不对，请输入如 27 或 2027");
+            int examYear = Integer.parseInt(digits);
+            if (examYear < 2000 || examYear > 2099) {
+                printError("请输入合理的四位年份，如 2027");
                 continue;
             }
-            // N年考研 → 初试在 N-1 年12月最后一个周六
-            int testYear = examYear - 1;
-            String date = calcLastSaturdayOfDecember(testYear);
-            printInfo(examYear + "考研 → 初试日期: " + date);
+            String date = calcLastSaturdayOfDecember(examYear);
+            printInfo(examYear + "年初试日期: " + date);
             return date;
         }
     }
@@ -192,11 +183,21 @@ public class ConsoleUtil {
     }
 
     /**
-     * 从菜单中选择一项，返回 1-based 索引
+     * 从菜单中选择一项，返回 1-based 索引（不含返回选项）。
      */
     public static int selectFromMenu(String[] options) {
         printMenu(options);
         return readInt("请选择", 1, options.length);
+    }
+
+    /**
+     * 从菜单中选择一项，自动追加 [0] 返回上一级，选择该项时返回 0。
+     */
+    public static int selectFromMenuWithBack(String[] options) {
+        printMenu(options);
+        System.out.println(BOLD + "  [0]" + RESET + " 返回上一级");
+        System.out.println();
+        return readInt("请选择", 0, options.length);
     }
 
     // ==================== 表格输出 ====================
