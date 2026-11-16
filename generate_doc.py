@@ -8,7 +8,7 @@ import os
 sys.path.insert(0, '/Users/dante/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/lib/python3.12/site-packages')
 
 from docx import Document
-from docx.shared import Pt, Cm, Emu
+from docx.shared import Pt, Cm, Emu, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn, nsdecls
 from docx.oxml import OxmlElement, parse_xml
@@ -27,6 +27,7 @@ def set_run_font(run, font_name='宋体', font_size=Pt(10.5), bold=False):
     run.font.name = font_name
     run.font.size = font_size
     run.bold = bold
+    run.font.color.rgb = RGBColor(0, 0, 0)
     rpr = run._element.get_or_add_rPr()
     rfonts = rpr.find(qn('w:rFonts'))
     if rfonts is None:
@@ -52,6 +53,7 @@ def add_heading(doc, text, level=1):
     """Add a heading with proper eastAsia font."""
     h = doc.add_heading(text, level=level)
     for run in h.runs:
+        run.font.color.rgb = RGBColor(0, 0, 0)
         rpr = run._element.get_or_add_rPr()
         rfonts = rpr.find(qn('w:rFonts'))
         if rfonts is None:

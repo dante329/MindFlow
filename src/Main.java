@@ -150,6 +150,10 @@ public class Main {
 
         User user = UserService.getInstance().register(username, password, nickname);
 
+        // 先登录，再填写考研信息（updateProfile 需要登录态）
+        UserService.getInstance().login(username, password);
+        startReminderThread();
+
         // 可选：填写考研信息
         if (ConsoleUtil.confirm("是否现在填写考研目标信息？")) {
             String school = ConsoleUtil.readLine("目标院校");
@@ -158,9 +162,6 @@ public class Main {
             UserService.getInstance().updateProfile(nickname, school, major, examDate);
         }
 
-        // 自动登录
-        UserService.getInstance().login(username, password);
-        startReminderThread();
         // 首次注册自动导入示例题目
         SampleDataService.getInstance().initIfEmpty();
     }
