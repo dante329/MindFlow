@@ -78,11 +78,7 @@ public class Main {
                 }
             }
         } catch (BusinessException e) {
-            if (ConsoleUtil.isBackSignal(e)) {
-                ConsoleUtil.printInfo("已返回上级菜单");
-            } else {
-                ConsoleUtil.printError(e.getMessage());
-            }
+            ConsoleUtil.printError(e.getMessage());
         }
 
         return true;
@@ -132,11 +128,7 @@ public class Main {
                 }
             }
         } catch (BusinessException e) {
-            if (ConsoleUtil.isBackSignal(e)) {
-                ConsoleUtil.printInfo("已返回上级菜单");
-            } else {
-                ConsoleUtil.printError(e.getMessage());
-            }
+            ConsoleUtil.printError(e.getMessage());
         } catch (Exception e) {
             ConsoleUtil.printError("操作异常: " + e.getMessage());
         }

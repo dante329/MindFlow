@@ -82,18 +82,12 @@ public class ConsoleUtil {
     /**
      * 读取一行字符串输入
      */
-    /** 内部标记：用户输入 q 请求返回上一级 */
-    private static final String BACK_SIGNAL = "__BACK__";
-
     public static String readLine(String prompt) {
-        System.out.print(prompt + " (q=返回): ");
+        System.out.print(prompt + ": ");
         try {
-            String line = SCANNER.nextLine().trim();
-            if ("q".equalsIgnoreCase(line) || "quit".equalsIgnoreCase(line)) {
-                throw new BusinessException(BACK_SIGNAL);
-            }
-            return line;
+            return SCANNER.nextLine().trim();
         } catch (java.util.NoSuchElementException e) {
+            // 输入流已关闭（如管道输入耗尽），返回空字符串
             return "";
         }
     }
@@ -103,19 +97,15 @@ public class ConsoleUtil {
      */
     public static int readInt(String prompt) {
         while (true) {
-            System.out.print(prompt + " (q=返回): ");
+            System.out.print(prompt + ": ");
             String input;
             try {
                 input = SCANNER.nextLine().trim();
             } catch (java.util.NoSuchElementException e) {
                 throw new BusinessException("输入流已关闭");
             }
-            if ("q".equalsIgnoreCase(input) || "quit".equalsIgnoreCase(input)) {
-                throw new BusinessException(BACK_SIGNAL);
-            }
             if (input.isEmpty()) {
-                printError("输入不能为空");
-                continue;
+                throw new BusinessException("输入为空");
             }
             try {
                 return Integer.parseInt(input);
@@ -136,13 +126,6 @@ public class ConsoleUtil {
             }
             printError("请输入 " + min + " 到 " + max + " 之间的数字");
         }
-    }
-
-    /**
-     * 判断异常是否为"返回上一级"信号
-     */
-    public static boolean isBackSignal(BusinessException e) {
-        return BACK_SIGNAL.equals(e.getMessage());
     }
 
     /**
